@@ -51,6 +51,8 @@
 
 
 \documentclass[journal,transmag]{IEEEtran}
+\usepackage[style=authoryear,backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
+\usepackage{graphicx}
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
@@ -89,7 +91,7 @@
 
 % *** CITATION PACKAGES ***
 %
-%\usepackage{cite}
+\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of the IEEE. Loading the cite package will
@@ -356,31 +358,23 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls for\\ IEEE \textsc{Transactions on Magnetics}}
-
-
+\title{Indoor Localization system using Time of Flight in UWB spectrum}
 
 % author names and affiliations
 % transmag papers use the long conference author name format.
 
-\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-Homer Simpson\IEEEauthorrefmark{2},
-James Kirk\IEEEauthorrefmark{3}, 
-Montgomery Scott\IEEEauthorrefmark{3}, and
-Eldon Tyrell\IEEEauthorrefmark{4},~\IEEEmembership{Fellow,~IEEE}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering,
-Georgia Institute of Technology, Atlanta, GA 30332 USA}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, CA 96678 USA}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, CA 90210 USA}% <-this % stops an unwanted space
-\thanks{Manuscript received December 1, 2012; revised August 26, 2015. 
-Corresponding author: M. Shell (email: http://www.michaelshell.org/contact.html).}}
+\author{\IEEEauthorblockN{Anirban Ghosh,
+Albert Davies,
+Tejus Siddagangaiah}
+\IEEEauthorblockA{Electrical and Computer Engineering Department,
+Carnegie Mellon University, Pittsburgh, PA 15213 USA}}
+
 
 
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Transactions on Magnetics Journals}
+%\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+%{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Transactions on Magnetics Journals}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
 % 
@@ -410,15 +404,15 @@ Corresponding author: M. Shell (email: http://www.michaelshell.org/contact.html)
 % \maketitle.
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
-\IEEEtitleabstractindextext{%
-\begin{abstract}
-The abstract goes here.
-\end{abstract}
+%\IEEEtitleabstractindextext{%
+%\begin{abstract}
+%The abstract goes here.
+%\end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-IEEE, IEEEtran, IEEE Transactions on Magnetics, journal, \LaTeX, magnetics, paper, template.
-\end{IEEEkeywords}}
+%\begin{IEEEkeywords}
+%IEEE, IEEEtran, IEEE Transactions on Magnetics, journal, \LaTeX, %magnetics, paper, template.
+%\end{IEEEkeywords}}
 
 
 
@@ -455,42 +449,79 @@ IEEE, IEEEtran, IEEE Transactions on Magnetics, journal, \LaTeX, magnetics, pape
 
 
 
-\section{Introduction}
-% The very first letter is a 2 line initial drop letter followed
-% by the rest of the first word in caps.
-% 
-% form to use if the first word consists of a single letter:
-% \IEEEPARstart{A}{demo} file is ....
-% 
-% form to use if you need the single drop letter followed by
-% normal text (unknown if ever used by the IEEE):
-% \IEEEPARstart{A}{}demo file is ....
-% 
-% Some journals put the first two words in caps:
-% \IEEEPARstart{T}{his demo} file is ....
-% 
-% Here we have the typical use of a "T" for an initial drop letter
-% and "HIS" in caps to complete the first word.
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE \textsc{Transactions on Magnetics} journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+\section{Motivation}
+Positioning systems based on GPS have become ubiquitous over the past few decades. Due to the attenuation of GPS signals by concrete walls, they cannot be used in an indoor setting for localization. In recent years, multiple attempts have been made to design a localization system for indoor applications. Indoor localization has the potential for trans-formative impact in a wide variety of applications like augmented reality, indoor navigation and advertising. Due to the inherent nature of the applications, high accuracy as well as energy efficiency is required.
 
-\hfill mds
- 
-\hfill August 26, 2015
+Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID, BLE\cite{IEEE}, WiFi, Ultrasound\cite{IEEE3}) and motion based algorithms(Inertial based sensing). The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\section{Methodology}
+In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of CC3200 and DW1000 are shown in figures \ref{CC3200BD} and \ref{DW1000BD}.
 
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{cc3200bd}
+\caption{{Block Diagram of CC3200 SoC}}
+\label{CC3200BD}
+\end{figure}
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.5in]{dw1000bd}
+\caption{{Block Diagram of DW1000 UWB transceiver}}
+\label{DW1000BD}
+\end{figure}
+
+We can localize any node if we know the distance of the node from 3 or more fixed anchor points. In the TOF approach, every node that we are trying to localize, transmits packets to a set of anchored nodes whose locations are known. The anchor nodes reply with the appropriate timestamps. Using the time taken for roundtrip the distance between pairs of nodes can be calculated. Once the distance of the mobile node from each of the anchor nodes is determined, the co-ordinates of the mobile nodes can be triangulated in 3 dimensions.
+
+To obtain the distance measurements, we having chosen to use time of flight of radio over UWB spectrum. UWB involves sending very short spikes of radio signals. This provides significant benefits like fine time resolution, energy efficiency and robustness to interference in harsh environments \cite{IEEE4}. UWB is also particularly resistant to Multi-Path effects. In this project we plan to use DecaWave ScenSor DWM1000 Modules for UWB TOF measurements. We plan to have both our mobile and anchor nodes as DWM1000 modules. Using these modules the distance of the mobile node from each of the anchor nodes can be determined.  This information has to be accumulated at a gateway for the co-ordinate computation. For this we plan to interface DWM1000 with an appropriate MCU platform using the SPI interface supported by DWM1000.
+
+%Describe why CC3200.
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.5in]{eachnode.png}
+\caption{{System Block Diagram of Each Node}}
+\label{EACHNODEBD}
+\end{figure}
+
+A single chip Wireless MCU - CC3200 from Texas Instruments will be used to configure the sensor and run our application. The CC3200 SoC comes with a inbuilt WiFi module which can be used to interface with a PC to log the data and monitor all the nodes.
+
+CC3200 is a WiFi Certified single chip Micro controller unit with built-in 2.4GHz PHY/MAC and TCP/IP networking engine. The controller provides a easy to use framework with wide variety of peripherals. Multiple Real-Time Operating systems like FreeRTOS and TIRTOS are supported for this platform. Although, we do not plan to use many of these features, the platform/software can be scaled to implement complex algorithms and capabilities in the future. The network engine on this controller can be configured to behave as an access point or as a host. A mobile device or a personal computer can connect to the SoC when configured as an access point. We plan to use this capability to log data and monitor all the mobile nodes. In our architecture, the mobile node transfers all the data(time stamps from each anchor node) to a personal computer(gateway). This gateway then uses these pairwise distance measurements to compute the co-ordinates of the mobile node. A software application running on the computer, logs this data and displays the location of the mobile nodes on a GUI. 
+
+
+One disadvantage of using ToF algorithm is that it cannot be scaled. As the number of nodes increase, we expect each node to consume more energy. As an extended goal, we propose to use Time Difference of Arrival(TDOA)\cite{anthonyrowe's paper} to provide scalability. In this system architecture, anchor nodes will broadcast their location to all the nodes that are being localized in the vicinity. Using the anchor node's location and the difference in time of arrival of packets from each of the anchor nodes, triangulation can be performed. A detailed explanation of these algorithms are provided in the next section.
+
+\section{Goals}
+The Goals of the project are listed below: 
+
+\begin{itemize}
+    \item Goal : In our final project presentation, we plan to demonstrate the localization task performed by our system on a GUI. As the mobile node moves, the location of the node on the GUI will get updated in real-time.
+    \item Stretch Goal 1 : Due to the inherent nature of the ToF algorithm, it will not be scalable when the number of mobile nodes are significantly high. With ToF, the anchor nodes have to send packets to all nodes with accurate time-stamps when the mobile nodes request for it. An efficient algorithm called Time Difference of Arrival(TDOA) can be used to overcome this problem. 
+    \item Stretch Goal 2 : The crystals used on the DWM1000 for generating the clock frequency will have different performance on each board, which may result in inaccurate time-stamps. Due to this variance, the distance calculated may be quite inaccurate. If the error is too high, the localization will be way off. If this problem arises, we plan to synchronize the clocks across all DWM1000 modules externally to improve the accuracy.    
+\end{itemize}
+\section{Milestones}
+The following are the milestones expected in course of the project:
+\begin{itemize}
+    \item Interface of DWM1000 with CC3200, \today : The DWM1000 modules have to be interfaced over the SPI interface with the CC3200 MCUs. This might require significant work in porting the SPI libraries from the reference STM32F105 board to TI CC3200 board.
+    \item Distance measurement between two nodes (Mid-term Milestone) : The DWM1000 modules have to configured to work in the TOF mode. We plan to complete the distance measurement between two nodes with direct communication. In our demonstration during the mid-term project presentation, we plan to demonstrate the accuracy of distance measurement with the DWM1000 modules.
+    \item Application Development for Localization (Final Project presentation) : Once the point-to-point communication is established and distance measurement between two nodes is done, we plan to build on this to implement our final application code. The final application code running on the mobile node will calculate the distance between itself and multiple anchor nodes. This data is sent to a PC to perform localization and compute the location of the mobile node. 
+
+\end{itemize}
+\section{Work Partitioning}
+We plan to divide the work amongst the three team members as follows:
+\begin{itemize}
+    \item One team member will work on interfacing the CC3200 with the PC and get the GUI running. 
+    \item Second team member will work on porting the code required for DWM1000 from reference solution to CC3200
+    \item Third team member will work on hardware interfacing of DWM1000 with CC3200.
+\end{itemize}
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.5in]{sysbd.png}
+\caption{{Complete system architecture}}
+\label{SYSTEMBD}
+\end{figure}
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -588,14 +619,6 @@ Subsubsection text here.
 
 
 
-
-\section{Conclusion}
-The conclusion goes here.
-
-
-
-
-
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
@@ -611,28 +634,6 @@ The conclusion goes here.
 %
 
 
-\appendices
-\section{Proof of the First Zonklar Equation}
-Appendix one text goes here.
-
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
-
-
-% use section* for acknowledgment
-\section*{Acknowledgment}
-
-
-The authors would like to thank...
-
-
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
 
 
 
@@ -658,13 +659,24 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
+% \begin{thebibliography}{1}
+
+% \bibitem{IEEEhowto:kopka}
+% H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+% \end{thebibliography}
+%\bibliographystyle{unsrt}
+
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
+  \bibitem{IEEE} Lazik, Patrick and Rajagopal, Niranjini and Shih, Oliver and Sinopoli, Bruno and Rowe, Anthony \emph{ALPS: A bluetooth and ultrasound platform for mapping and localization}, \hskip Proceedings of the 13th ACM Conference on Embedded Networked Sensor Systems
+  \bibitem{IEEE2} Rajagopal, Niranjini and Chayapathy, Sindhura and Sinopoli, Bruno and Rowe, Anthony \emph{Beacon placement for range-based indoor localization}, \hskip ndoor Positioning and Indoor Navigation (IPIN), 2016 International Conference
+  \bibitem{IEEE3} Lazik, Patrick and Rajagopal, Niranjini and Sinopoli, Bruno and Rowe, Anthony \emph{Ultrasonic time synchronization and ranging on smartphones}, \hskip Real-Time and Embedded Technology and Applications Symposium (RTAS), 2015 IEEE
+  \bibitem{IEEE4} Ye, Tingcong and Walsh, Michael and Haigh, Peter and Barton, John and O'Flynn, Brendan \emph{Experimental impulse radio IEEE 802.15. 4a UWB based wireless sensor localization technology: Characterization, reliability and ranging}, \hskip ISSC 2011, 22nd IET Irish Signals and Systems Conference, Dublin, Ireland. 23-24 Jun 2011
 \end{thebibliography}
+
+
 
 % biography section
 % 
@@ -677,22 +689,6 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
-\end{IEEEbiography}
-
-% if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
-
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
@@ -710,5 +706,3 @@ Biography text here.
 
 % that's all folks
 \end{document}
-
-
