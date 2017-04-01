@@ -15,30 +15,23 @@ line_value2 = 0.0
 plt.ion()
 plt.axis([0, 10, 0, 10])
 pl, = plt.plot([line_value1], [line_value2], 'ro')
-plt.pause(0.001)
+plt.pause(0.000001)
 # plt.show()
-with serial.Serial('/dev/tty.usbmodem1411', 9600, timeout=1) as ser:
+with serial.Serial('/dev/tty.usbmodem1411', 115200, timeout=1) as ser:
     while True:
-    	if(a > 1):
-        	line = ser.readline()
-        	print line,
-        	if(line != ""):
-        	# format(line, '04x')
-    			line_value1 = float(line)
-    			print "line value 1 = ",
-    			print line_value1
-        	line = ser.readline()
-        	print line,
-        	if(line != ""):
-        	# format(line, '04x')
-    			line_value2 = float(line)
-    			print "line value 1 = ",
-    			print line_value1
-        	# line_value2 = float(line)
+        print "Hello\n"
+        line = ser.readline()
+        if(a > 10):
+            print line,
+            if(line != ""):
+                line_value1 = float(line)
+                print "line value 1 = ",
+                print line_value1
+                line_value2 = line_value1
         	value = [line_value1, line_value2]
         	pl.set_xdata(line_value1)
         	pl.set_ydata(line_value2)
-        	plt.pause(0.001)
+        	plt.pause(0.000001)
         	plt.draw()
         	# print value
         a = a + 1
