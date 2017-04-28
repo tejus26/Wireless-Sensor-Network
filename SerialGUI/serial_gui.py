@@ -22,6 +22,9 @@ m = 'o'
 ax.set_xlim3d(0, 12)
 ax.set_ylim3d(0,12)
 ax.set_zlim3d(-6,6)
+ax.set_xlabel('X axis')
+ax.set_ylabel('Y axis')
+ax.set_zlabel('Z axis')
 ax.scatter(0.0, 0.0, 0.0, c=c, marker=m)
 plt.pause(0.000000001)
 plt.show()
@@ -88,8 +91,12 @@ with serial.Serial('/dev/tty.usbmodem1411', 115200, timeout=1) as ser:
                     zs = round(t.loc.z, 3)
                     plt.cla()
                     ax.set_xlim3d(0, 12)
-                    ax.set_ylim3d(0,12)
+                    ax.set_ylim3d(0,5)
                     ax.set_zlim3d(-6,6)
+                    ax.set_xlabel('X axis')
+                    ax.set_ylabel('Y axis')
+                    ax.set_zlabel('Z axis')
+
 
                     ax.scatter(xs, ys, zs, c=c, marker=m)
                     plt.pause(0.000000001)
