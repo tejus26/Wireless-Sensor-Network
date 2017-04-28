@@ -1,38 +1,102 @@
 import serial
 import matplotlib.pyplot as plt
-import numpy
+import localization as lx
+import time
+from mpl_toolkits.mplot3d import Axes3D
 
-# pl = plt.plot([], [], 'ro')
-# i = [0.02, 0.03]
+import numpy as np
+
 a = 5
-# def update_line(hl, new_data):
-#     hl.set_xdata(numpy.append(hl.get_xdata(), new_data))
-#     hl.set_ydata(numpy.append(hl.get_ydata(), new_data))
-#     # plt.draw()
-#     plt.show()
+
 line_value1 = 0.0
 line_value2 = 0.0
+line_value3 = 0.0
+
+#Adding 3D PLOT
 plt.ion()
-plt.axis([0, 10, 0, 10])
-pl, = plt.plot([line_value1], [line_value2], 'ro')
-plt.pause(0.000001)
-# plt.show()
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+c = 'b'
+m = 'o'
+
+ax.set_xlim3d(0, 12)
+ax.set_ylim3d(0,12)
+ax.set_zlim3d(-6,6)
+ax.scatter(0.0, 0.0, 0.0, c=c, marker=m)
+plt.pause(0.000000001)
+plt.show()
 with serial.Serial('/dev/tty.usbmodem1411', 115200, timeout=1) as ser:
     while True:
-        print "Hello\n"
-        line = ser.readline()
-        if(a > 10):
-            print line,
-            if(line != ""):
-                line_value1 = float(line)
-                print "line value 1 = ",
-                print line_value1
-                line_value2 = line_value1
-        	value = [line_value1, line_value2]
-        	pl.set_xdata(line_value1)
-        	pl.set_ydata(line_value2)
-        	plt.pause(0.000001)
-        	plt.draw()
-        	# print value
-        a = a + 1
+
+        # print "Hello\n"
+        ser.flushInput()
+        line1 = ser.readline()
+        line2 = ser.readline()
+        line3 = ser.readline()
+        line4 = ser.readline()
+
+        # print line1,
+        # print line2,
+        # print line3,
+        # print line4
+        try:
+            line1.split(' ') and line2.split(' ') and line3.split(' ') and line4.split(' ')
+            id1, r1 = line1.split(' ')
+            id2, r2 = line2.split(' ')
+            id3, r3 = line3.split(' ')
+            id4, r4 = line4.split(' ')
+            # print r1, 
+            # print id1
+            # print r2, 
+            # print id2
+            # print r3, 
+            # print id3
+            # print r4,
+            # print id4
+            if((len(id1) == 8) and (len(id2) == 8) and (len(id3) == 8) and (len(id4) == 8)):
+                try:
+                    float(r1) and float(r2) and float(r3) and float(r4)
+                    P=lx.Project(mode='3D', solver='LSE')
+                    P.add_anchor('FFFFFAFF', (0, 0, 0))
+                    P.add_anchor('FFFFFCFF', (12,5,3))
+                    P.add_anchor('FFFFFBFF', (10, 0, 0))
+                    P.add_anchor('FFFFFDFF', (8, 5, -2))
+                    t,label=P.add_target()
+                    t.add_measure(id1, r1)
+                    t.add_measure(id2, r2)
+                    t.add_measure(id3, r3)
+                    t.add_measure(id4, r4)
+                    # start = time.time()
+                    P.solve()
+                    # end = time.time()
+                    # print (end - start)
+                    print r1, 
+                    print id1
+                    print r2, 
+                    print id2
+                    print r3, 
+                    print id3
+                    print r4,
+                    print id4
+                    print "************"
+                    # plt.gcf().clear()
+                    print round(t.loc.x, 3),
+                    print round(t.loc.y, 3),
+                    print round(t.loc.z,3)
+                    xs = round(t.loc.x, 3)
+                    ys = round(t.loc.y, 3)
+                    zs = round(t.loc.z, 3)
+                    plt.cla()
+                    ax.set_xlim3d(0, 12)
+                    ax.set_ylim3d(0,12)
+                    ax.set_zlim3d(-6,6)
+
+                    ax.scatter(xs, ys, zs, c=c, marker=m)
+                    plt.pause(0.000000001)
+                    plt.show()
+
+                except ValueError:
+                    a = a + 1
+        except ValueError:
+            a = a + 1
 ser.close()
