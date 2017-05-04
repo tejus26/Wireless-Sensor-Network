@@ -6,6 +6,64 @@ from mpl_toolkits.mplot3d import Axes3D
 
 import numpy as np
 
+#x-axis_max = 7.10
+#y-axis_max = 4.32
+#z-axis_max = 
+
+#Left fixture back
+#Ax =  1.46 
+#Ay = 4.88
+#Az = 2.34
+
+# Table corner
+#Bx = 7.10
+#By = 4.32
+#Bz = 0.92
+
+#Origin, back door
+#Cx = 0
+#Cy = 0
+#Cz = 0
+
+
+#Above exit sign
+#Dx = 7.1 - 0.24
+#Dy = -1.22
+#Dz = 2.5
+
+# 0.25
+# 0.75
+# 1.52
+# 2
+# 3.04
+# 4.56
+# 6.08
+
+
+# 0.55
+# 0.55
+# 0.83
+# 0.85
+# 0.91
+# 0.79
+# 0.92
+def caliberate(x):
+    if(x < 0.5):
+        return 0.55
+    elif (x >=0.5 and x < 1.132):
+        return 0.55
+    elif(x >= 1.132 and x < 1.76):
+        return 0.83
+    elif (x < 2.52):
+        return 0.85
+    elif (x < 3.8):
+        return 0.91
+    elif (x < 5.32):
+        return 0.79
+    else:
+        return 0.92
+
+
 a = 5
 
 line_value1 = 0.0
@@ -56,15 +114,17 @@ with serial.Serial('/dev/tty.usbmodem1411', 115200, timeout=1) as ser:
             print id3
             print r4,
             print id4
+
+
             
             if((len(id1) == 8) and (len(id2) == 8) and (len(id3) == 8) and (len(id4) == 8)):
                 try:
                     float(r1) and float(r2) and float(r3) #and float(r4)
-                    P=lx.Project(mode='3D', solver='LSE')
-                    P.add_anchor('FFFFFAFF', (0, 0, 0))
-                    P.add_anchor('FFFFFBFF', (12.35, 0 , 0.0))
-                    P.add_anchor('FFFFFCFF', (10.43, 5.73, 1.2))
-                    P.add_anchor('FFFFFDFF', (9.31, 5.73, -0.72))
+                    P=lx.Project(mode='3D', solver='asdf')
+                    P.add_anchor('FFFFFAFF', (1.46, 4.88, 2.34))
+                    P.add_anchor('FFFFFBFF', (7.10, 4.32 , 0.92))
+                    P.add_anchor('FFFFFCFF', (0, 0, 0))
+                    P.add_anchor('FFFFFDFF', (6.86, -1.22, 2.5))
                     
                     # P.add_anchor('FFFFFAFF', (0, 0, 0))
                     # P.add_anchor('FFFFFBFF', (12, 0 , 0))
@@ -75,6 +135,10 @@ with serial.Serial('/dev/tty.usbmodem1411', 115200, timeout=1) as ser:
                     r2 = float (r2)
                     r3 = float(r3)
                     r4 = float (r4)
+                    r1 = r1 - caliberate(r1)
+                    r2 = r2 - caliberate(r2)
+                    r3 = r3 - caliberate(r3)
+                    r3 = r3 - caliberate(r3)
                     t.add_measure(id1, r1)
                     t.add_measure(id2, r2)
                     t.add_measure(id3, r3)
