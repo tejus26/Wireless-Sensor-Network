@@ -3,6 +3,7 @@ import serial
 import matplotlib.pyplot as plt
 import localization as lx
 import time
+import statistics as st
 from mpl_toolkits.mplot3d import Axes3D
 import sys
 import telnetlib
@@ -49,6 +50,10 @@ plt.pause(0.000000001)
 plt.show()
 tn = telnetlib.Telnet("192.168.240.1")
 
+x_hist = []
+y_hist = []
+z_hist = []
+
 
 while True:
     line1 = tn.read_until("\n")
@@ -66,7 +71,7 @@ while True:
     print line3,
     print line4
     try:
-    	line1.split(' ') and line2.split(' ') and line3.split(' ') and line4.split(' ')
+        line1.split(' ') and line2.split(' ') and line3.split(' ') and line4.split(' ')
         id1, r1 = line1.split(' ')
         id2, r2 = line2.split(' ')
         id3, r3 = line3.split(' ')
@@ -108,26 +113,38 @@ while True:
                 t.add_measure(id3, r3)
                 t.add_measure(id4, r4)
                 try:
-                	P.solve()
-                	print round(t.loc.x, 3),
-                	print round(t.loc.y, 3),
-                	print round(t.loc.z,3)
-                	xs = round(t.loc.x, 3)
-                	ys = round(t.loc.y, 3)
-                	zs = round(t.loc.z, 3)
-                	plt.cla()
-                	ax.set_xlim3d(0, 12)
-                	ax.set_ylim3d(0,12)
-                	ax.set_zlim3d(0,12)
-                	ax.set_xlabel('X axis')
-                	ax.set_ylabel('Y axis')
-                	ax.set_zlabel('Z axis')
-                	ax.scatter(xs, ys, zs, c=c, marker=m)
-                	plt.pause(0.000000001)
-                	plt.show()
+                    P.solve()
+                    if len(x_hist)>3:
+                        x_hist.pop()
+                        y_hist.pop()
+                        z_hist.pop()
+                    print len(x_hist)
+                    x_hist.insert(0,t.loc.x);
+                    y_hist.insert(0,t.loc.y);
+                    z_hist.insert(0,t.loc.z);
+                    rob_x = st.median(x_hist)
+                    rob_y = st.median(y_hist)
+                    rob_z = st.median(z_hist)
+                    print round(rob_x, 3),
+                    print round(rob_y, 3),
+                    print round(rob_z,3)
+                    xs = round(rob_x, 3)
+                    ys = round(rob_y, 3)
+                    zs = round(rob_z, 3)
+                    #plt.cla()
+                    ax.set_xlim3d(0, 12)
+                    ax.set_ylim3d(0,12)
+                    ax.set_zlim3d(0,12)
+                    ax.set_xlabel('X axis')
+                    ax.set_ylabel('Y axis')
+                    ax.set_zlabel('Z axis')
+                    ax.scatter(xs, ys, zs, c=c, marker=m)
+                    plt.pause(0.000000001)
+                    plt.show()
+                    tn.read_all()
                 except AttributeError:
-                	a = a + 1
+                    a = a + 1
             except ValueError:
-            	a = a + 1
+                a = a + 1
     except ValueError:
-		a = a + 1
+        a = a + 1
