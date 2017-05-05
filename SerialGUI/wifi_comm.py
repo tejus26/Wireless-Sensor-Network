@@ -9,6 +9,45 @@ import telnetlib
 
 import numpy as np
 
+# Podium
+#5.78 0.535 0.869
+
+#Snack Table
+#4.659 4.456 0.596
+
+#Soda Table
+#2.943 4.58 0.68
+
+#Room Center
+#2.655 2.015 0.891
+
+#Refrigerator
+#3.048 -0.634 1.891
+
+def find_location(xs, ys, zs):
+    dist_pod = (xs - 5.78)**2 + (ys - 0.535)**2 #+ (zs - 0.869)**2
+    dist_snack = (xs - 4.659)**2 + (ys - 4.456)**2 #+ (zs - 0.596)**2
+    dist_soda = (xs - 2.934)**2 + (ys - 4.58)**2 #+ (zs - 0.68)**2
+    dist_center = (xs - 2.655)**2 + (ys - 2.015)**2 #+ (zs - 0.891)**2
+    dist_refr = (xs - 3.048)**2 + (ys - (-0.639))**2 #+ (zs - 1.891)**2
+
+    mind_dist = min(dist_pod, dist_snack, dist_soda, dist_center, dist_refr)
+    if mind_dist > 0.5:
+        return "I am here!"
+    elif mind_dist == dist_pod:
+        return "You are the presenter now, Good Luck!"
+    elif mind_dist == dist_snack:
+        return "Hungry? Snacks are here!"
+    elif mind_dist == dist_soda:
+        return "Thirsty? Coke's here!"
+    elif mind_dist == dist_center:
+        return "You are in the center of the room!"
+    elif mind_dist == dist_refr:
+        return "Looking for treasure? Open the door."
+    return "I am here!"
+
+
+
 
 def caliberate(x):
     if(x < 0.5):
@@ -38,9 +77,9 @@ ax = fig.add_subplot(111, projection='3d')
 c = 'b'
 m = 'o'
 
-ax.set_xlim3d(0, 12)
-ax.set_ylim3d(0,12)
-ax.set_zlim3d(0,12)
+ax.set_xlim3d(0, 8)
+ax.set_ylim3d(0,6)
+ax.set_zlim3d(0,3)
 ax.set_xlabel('X axis')
 ax.set_ylabel('Y axis')
 ax.set_zlabel('Z axis')
@@ -122,7 +161,7 @@ while True:
                 	ax.set_xlabel('X axis')
                 	ax.set_ylabel('Y axis')
                 	ax.set_zlabel('Z axis')
-                	ax.scatter(xs, ys, zs, c=c, marker=m)
+                	ax.scatter(xs, ys, zs, c=c, marker=m); ax.text(xs, ys, zs, find_location(xs, ys, zs))
                 	plt.pause(0.000000001)
                 	plt.show()
                 except AttributeError:
