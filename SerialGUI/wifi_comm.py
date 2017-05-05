@@ -76,7 +76,7 @@ while True:
         id2, r2 = line2.split(' ')
         id3, r3 = line3.split(' ')
         id4, r4 = line4.split(' ')
-        if((len(id1) == 8) and (len(id2) == 8) and (len(id3) == 8) and (len(id4) == 8)):
+        if((id1 == 'FFFFFAFF') and (id2 == 'FFFFFBFF') and (id3 == 'FFFFFCFF') and (id4 == 'FFFFFDFF')):
             try:
                 float(r1) and float(r2) and float(r3) #and float(r4)
                 P=lx.Project(mode='3D', solver='LSE')
@@ -114,7 +114,7 @@ while True:
                 t.add_measure(id4, r4)
                 try:
                     P.solve()
-                    if len(x_hist)>3:
+                    if len(x_hist)>5:
                         x_hist.pop()
                         y_hist.pop()
                         z_hist.pop()
@@ -141,7 +141,7 @@ while True:
                     ax.scatter(xs, ys, zs, c=c, marker=m)
                     plt.pause(0.000000001)
                     plt.show()
-                    tn.read_all()
+                    tn.read_very_eager()
                 except AttributeError:
                     a = a + 1
             except ValueError:
