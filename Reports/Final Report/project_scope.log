@@ -1,0 +1,661 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  7 MAY 2017 20:02
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**project_scope.tex
+(./project_scope.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/IEEEtran/IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpdimenC=\dimen104
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
+\@IEEEtrantmpcountC=\count81
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 503.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen105
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen106
+\CLASSINFOnormalsizeunitybaselineskip=\dimen107
+\IEEEnormaljot=\dimen108
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen109
+\IEEEquantizedlengthdiff=\dimen110
+\IEEEquantizedtextheightdiff=\dimen111
+\IEEEilabelindentA=\dimen112
+\IEEEilabelindentB=\dimen113
+\IEEEilabelindent=\dimen114
+\IEEEelabelindent=\dimen115
+\IEEEdlabelindent=\dimen116
+\IEEElabelindent=\dimen117
+\IEEEiednormlabelsep=\dimen118
+\IEEEiedmathlabelsep=\dimen119
+\IEEEiedtopsep=\skip41
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@IEEEsubequation=\count86
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count87
+\c@table=\count88
+\@IEEEeqnnumcols=\count89
+\@IEEEeqncolcnt=\count90
+\@IEEEsubeqnnumrollback=\count91
+\@IEEEquantizeheightA=\dimen120
+\@IEEEquantizeheightB=\dimen121
+\@IEEEquantizeheightC=\dimen122
+\@IEEEquantizeprevdepth=\dimen123
+\@IEEEquantizemultiple=\count92
+\@IEEEquantizeboxA=\box26
+\@IEEEtmpitemindent=\dimen124
+\IEEEPARstartletwidth=\dimen125
+\c@IEEEbiography=\count93
+\@IEEEtranrubishbin=\box27
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2016/05/14 v3.4 programmable bibliographies (PK/JW/AB)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2013/04/04 v0.2 Provides if(tex) conditional for PDFTeX, XeTeX, 
+and LuaTeX
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count94
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count95
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xstring/xstring.tex
+\@xs@message=\write3
+\integerpart=\count96
+\decimalpart=\count97
+)
+Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
+)
+\c@tabx@nest=\count98
+\c@listtotal=\count99
+\c@listcount=\count100
+\c@liststart=\count101
+\c@liststop=\count102
+\c@citecount=\count103
+\c@citetotal=\count104
+\c@multicitecount=\count105
+\c@multicitetotal=\count106
+\c@instcount=\count107
+\c@maxnames=\count108
+\c@minnames=\count109
+\c@maxitems=\count110
+\c@minitems=\count111
+\c@citecounter=\count112
+\c@savedcitecounter=\count113
+\c@uniquelist=\count114
+\c@uniquename=\count115
+\c@refsection=\count116
+\c@refsegment=\count117
+\c@maxextratitle=\count118
+\c@maxextratitleyear=\count119
+\c@maxextrayear=\count120
+\c@maxextraalpha=\count121
+\c@abbrvpenalty=\count122
+\c@highnamepenalty=\count123
+\c@lownamepenalty=\count124
+\c@maxparens=\count125
+\c@parenlevel=\count126
+\blx@tempcnta=\count127
+\blx@tempcntb=\count128
+\blx@tempcntc=\count129
+\blx@maxsection=\count130
+\blx@maxsegment@0=\count131
+\blx@notetype=\count132
+\blx@parenlevel@text=\count133
+\blx@parenlevel@foot=\count134
+\blx@sectionciteorder@0=\count135
+\labelnumberwidth=\skip44
+\labelalphawidth=\skip45
+\biblabelsep=\skip46
+\bibitemsep=\skip47
+\bibnamesep=\skip48
+\bibinitsep=\skip49
+\bibparsep=\skip50
+\bibhang=\skip51
+\blx@bcfin=\read1
+\blx@bcfout=\write4
+\c@mincomprange=\count136
+\c@maxcomprange=\count137
+\c@mincompwidth=\count138
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/blx-dm.def)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'authoryear.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count139
+\c@savedafterword=\count140
+\c@annotator=\count141
+\c@savedannotator=\count142
+\c@author=\count143
+\c@savedauthor=\count144
+\c@bookauthor=\count145
+\c@savedbookauthor=\count146
+\c@commentator=\count147
+\c@savedcommentator=\count148
+\c@editor=\count149
+\c@savededitor=\count150
+\c@editora=\count151
+\c@savededitora=\count152
+\c@editorb=\count153
+\c@savededitorb=\count154
+\c@editorc=\count155
+\c@savededitorc=\count156
+\c@foreword=\count157
+\c@savedforeword=\count158
+\c@holder=\count159
+\c@savedholder=\count160
+\c@introduction=\count161
+\c@savedintroduction=\count162
+\c@namea=\count163
+\c@savednamea=\count164
+\c@nameb=\count165
+\c@savednameb=\count166
+\c@namec=\count167
+\c@savednamec=\count168
+\c@translator=\count169
+\c@savedtranslator=\count170
+\c@shortauthor=\count171
+\c@savedshortauthor=\count172
+\c@shorteditor=\count173
+\c@savedshorteditor=\count174
+\c@labelname=\count175
+\c@savedlabelname=\count176
+\c@institution=\count177
+\c@savedinstitution=\count178
+\c@lista=\count179
+\c@savedlista=\count180
+\c@listb=\count181
+\c@savedlistb=\count182
+\c@listc=\count183
+\c@savedlistc=\count184
+\c@listd=\count185
+\c@savedlistd=\count186
+\c@liste=\count187
+\c@savedliste=\count188
+\c@listf=\count189
+\c@savedlistf=\count190
+\c@location=\count191
+\c@savedlocation=\count192
+\c@organization=\count193
+\c@savedorganization=\count194
+\c@origlocation=\count195
+\c@savedoriglocation=\count196
+\c@origpublisher=\count197
+\c@savedorigpublisher=\count198
+\c@publisher=\count199
+\c@savedpublisher=\count266
+\c@language=\count267
+\c@savedlanguage=\count268
+\c@pageref=\count269
+\c@savedpageref=\count270
+\shorthandwidth=\skip52
+\shortjournalwidth=\skip53
+\shortserieswidth=\skip54
+\shorttitlewidth=\skip55
+\shortauthorwidth=\skip56
+\shorteditorwidth=\skip57
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2016/05/14 v3.4 biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load BibTeX backend compatibility...
+Package biblatex Info: ... file 'blx-bibtex.def' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/blx-bibtex.def
+File: blx-bibtex.def 2016/05/14 v3.4 biblatex compatibility (PK/JW/AB)
+
+
+Package biblatex Warning: Using fall-back BibTeX(8) backend:
+(biblatex)                functionality may be reduced/unavailable.
+
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2016/05/14 v3.4 biblatex compatibility (PK/JW/AB)
+\c@textcitecount=\count271
+\c@textcitetotal=\count272
+\c@textcitemaxnames=\count273
+\c@biburlnumpenalty=\count274
+\c@biburlucpenalty=\count275
+\c@biburllcpenalty=\count276
+\c@smartand=\count277
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2016/05/14 v3.4 biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2016/05/14 v3.4 biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count278
+\c@bbx:relatedtotal=\count279
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+File: authoryear.cbx 2016/05/14 v3.4 biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count280
+))
+\Gin@req@height=\dimen126
+\Gin@req@width=\dimen127
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+
+! Package biblatex Error: Incompatible package 'cite'.
+
+See the biblatex package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.353 \begin{document}
+                      
+The 'cite' package and biblatex are incompatible.
+
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2016/05/14 v3.4 biblatex localization (PK/JW/AB)
+)
+\@quotelevel=\count281
+\@quotereset=\count282
+
+(./project_scope.aux)
+\openout1 = `project_scope.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 353.
+LaTeX Font Info:    ... okay on input line 353.
+
+-- Lines per column: 58 (exact).
+Package biblatex Info: No input encoding detected.
+(biblatex)             Assuming 'ascii'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'ascii'.
+Package biblatex Info: Input encoding 'ascii' specified.
+Package biblatex Info: Data encoding 'ascii' specified.
+(biblatex)             No need to reencode data.
+\openout4 = `project_scope-blx.bib'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'project_scope.bbl' not found.
+No file project_scope.bbl.
+Package biblatex Info: Reference section=0 on input line 353.
+Package biblatex Info: Reference segment=0 on input line 353.
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count283
+\scratchdimen=\dimen128
+\scratchbox=\box28
+\nofMPsegments=\count284
+\nofMParguments=\count285
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count286
+\MPscratchDim=\dimen129
+\MPnumerator=\count287
+\makeMPintoPDFobject=\count288
+\everyMPtoPDFconversion=\toks17
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 420.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 420.
+
+
+LaTeX Warning: Citation `IEEE' on page 1 undefined on input line 455.
+
+
+LaTeX Warning: Citation `IEEE3' on page 1 undefined on input line 455.
+
+
+LaTeX Warning: Reference `CC3200BD' on page 1 undefined on input line 458.
+
+
+LaTeX Warning: Reference `DW1000BD' on page 1 undefined on input line 458.
+
+<cc3200bd.png, id=1, 585.18625pt x 669.50125pt>
+File: cc3200bd.png Graphic file (type png)
+ <use cc3200bd.png>
+Package pdftex.def Info: cc3200bd.png used on input line 462.
+(pdftex.def)             Requested size: 180.67499pt x 206.70555pt.
+
+<dw1000bd.png, id=3, 695.59875pt x 309.155pt>
+File: dw1000bd.png Graphic file (type png)
+ <use dw1000bd.png>
+Package pdftex.def Info: dw1000bd.png used on input line 470.
+(pdftex.def)             Requested size: 252.94499pt x 112.41843pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 470--471
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `IEEE4' on page 1 undefined on input line 477.
+
+<eachnode.png, id=4, 812.3148pt x 358.4592pt>
+File: eachnode.png Graphic file (type png)
+ <use eachnode.png>
+Package pdftex.def Info: eachnode.png used on input line 482.
+(pdftex.def)             Requested size: 252.94499pt x 111.61893pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 482--483
+ [][] 
+ []
+
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ <./cc3200bd.png> <./dw1000bd.png>]
+
+LaTeX Warning: Citation `anthonyrowe's paper' on page 2 undefined on input line
+ 492.
+
+<sysbd.png, id=14, 931.8012pt x 537.207pt>
+File: sysbd.png Graphic file (type png)
+ <use sysbd.png>
+Package pdftex.def Info: sysbd.png used on input line 521.
+(pdftex.def)             Requested size: 252.94499pt x 145.82655pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 521--522
+ [][] 
+ []
+
+! Missing number, treated as zero.
+<to be read again> 
+                   P
+l.673 ...m for mapping and localization}, \hskip P
+                                                  roceedings of the 13th ACM...
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   P
+l.673 ... for mapping and localization}, \hskip Pr
+                                                  oceedings of the 13th ACM ...
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Missing number, treated as zero.
+<to be read again> 
+                   n
+l.674 ...ange-based indoor localization}, \hskip n
+                                                  door Positioning and Indoo...
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+[2 <./eachnode.png> <./sysbd.png>]
+! Missing number, treated as zero.
+<to be read again> 
+                   R
+l.675 ...ion and ranging on smartphones}, \hskip R
+                                                  eal-Time and Embedded Tech...
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   R
+l.675 ...ion and ranging on smartphones}, \hskip R
+                                                  eal-Time and Embedded Tech...
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Missing number, treated as zero.
+<to be read again> 
+                   I
+l.676 ...ation, reliability and ranging}, \hskip I
+                                                  SSC 2011, 22nd IET Irish S...
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   I
+l.676 ...tion, reliability and ranging}, \hskip IS
+                                                  SC 2011, 22nd IET Irish Si...
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+[3
+
+] (./project_scope.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package biblatex Warning: Please (re)run BibTeX on the file(s):
+(biblatex)                project_scope
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'project_scope.run.xml'.
+\openout1 = `project_scope.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 8289 strings out of 493014
+ 145378 string characters out of 6133351
+ 390739 words of memory out of 5000000
+ 11762 multiletter control sequences out of 15000+600000
+ 33018 words of font info for 62 fonts, out of 8000000 for 9000
+ 1144 hyphenation exceptions out of 8191
+ 36i,7n,37p,1102b,672s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on project_scope.pdf (3 pages, 372300 bytes).
+PDF statistics:
+ 40 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+
