@@ -51,7 +51,8 @@
 
 
 \documentclass[journal,transmag]{IEEEtran}
-\usepackage[style=authoryear,backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
+%\usepackage[style=authoryear,backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
+%\addbibresource{refer.bib}
 \usepackage{graphicx}
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -452,7 +453,7 @@ Carnegie Mellon University, Pittsburgh, PA 15213 USA}}
 \section{Motivation}
 Positioning systems based on GPS have become ubiquitous over the past few decades. Due to the attenuation of GPS signals by concrete walls, they cannot be used in an indoor setting for localization. In recent years, multiple attempts have been made to design a localization system for indoor applications. Indoor localization has the potential for trans-formative impact in a wide variety of applications like augmented reality, indoor navigation and advertising. Due to the inherent nature of the applications, high accuracy as well as energy efficiency is required.
 
-Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID, BLE\cite{IEEE}, WiFi, Ultrasound\cite{IEEE3}) and motion based algorithms(Inertial based sensing). The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
+Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID\cite{bouet2008rfid}, BLE\cite{alps}, WiFi\cite{yang2012locating}, Ultrasound\cite{ultrasonic}) and motion based algorithms(Inertial based sensing)\cite{li2012reliable}. The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
 
 \section{Methodology}
 In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of CC3200 and DW1000 are shown in figures \ref{CC3200BD} and \ref{DW1000BD}.
@@ -699,9 +700,10 @@ We plan to divide the work among the three team members as follows:
 % http://mirror.ctan.org/biblio/bibtex/contrib/doc/
 % The IEEEtran BibTeX style support page is at:
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
-%\bibliographystyle{IEEEtran}
+\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
+%\printbibliography
+\bibliography{refer}
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
@@ -715,13 +717,13 @@ We plan to divide the work among the three team members as follows:
 % \end{thebibliography}
 %\bibliographystyle{unsrt}
 
-\begin{thebibliography}{1}
-
-  \bibitem{IEEE} Lazik, Patrick and Rajagopal, Niranjini and Shih, Oliver and Sinopoli, Bruno and Rowe, Anthony \emph{ALPS: A bluetooth and ultrasound platform for mapping and localization}, \hskip Proceedings of the 13th ACM Conference on Embedded Networked Sensor Systems
-  \bibitem{IEEE2} Rajagopal, Niranjini and Chayapathy, Sindhura and Sinopoli, Bruno and Rowe, Anthony \emph{Beacon placement for range-based indoor localization}, \hskip ndoor Positioning and Indoor Navigation (IPIN), 2016 International Conference
-  \bibitem{IEEE3} Lazik, Patrick and Rajagopal, Niranjini and Sinopoli, Bruno and Rowe, Anthony \emph{Ultrasonic time synchronization and ranging on smartphones}, \hskip Real-Time and Embedded Technology and Applications Symposium (RTAS), 2015 IEEE
-  \bibitem{IEEE4} Ye, Tingcong and Walsh, Michael and Haigh, Peter and Barton, John and O'Flynn, Brendan \emph{Experimental impulse radio IEEE 802.15. 4a UWB based wireless sensor localization technology: Characterization, reliability and ranging}, \hskip ISSC 2011, 22nd IET Irish Signals and Systems Conference, Dublin, Ireland. 23-24 Jun 2011
-\end{thebibliography}
+%\begin{thebibliography}{1}
+%
+%  \bibitem{IEEE} Lazik, Patrick and Rajagopal, Niranjini and Shih, Oliver and Sinopoli, Bruno and Rowe, Anthony \emph{ALPS: A bluetooth and ultrasound platform for mapping and localization}, \hskip Proceedings of the 13th ACM Conference on Embedded Networked Sensor Systems
+%  \bibitem{IEEE2} Rajagopal, Niranjini and Chayapathy, Sindhura and Sinopoli, Bruno and Rowe, Anthony \emph{Beacon placement for range-based indoor localization}, \hskip ndoor Positioning and Indoor Navigation (IPIN), 2016 International Conference
+%  \bibitem{IEEE3} Lazik, Patrick and Rajagopal, Niranjini and Sinopoli, Bruno and Rowe, Anthony \emph{Ultrasonic time synchronization and ranging on smartphones}, \hskip Real-Time and Embedded Technology and Applications Symposium (RTAS), 2015 IEEE
+%  \bibitem{IEEE4} Ye, Tingcong and Walsh, Michael and Haigh, Peter and Barton, John and O'Flynn, Brendan \emph{Experimental impulse radio IEEE 802.15. 4a UWB based wireless sensor localization technology: Characterization, reliability and ranging}, \hskip ISSC 2011, 22nd IET Irish Signals and Systems Conference, Dublin, Ireland. 23-24 Jun 2011
+%\end{thebibliography}
 
 
 
