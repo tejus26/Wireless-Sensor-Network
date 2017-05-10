@@ -455,8 +455,28 @@ Carnegie Mellon University, Pittsburgh, PA 15213 USA}}
 Positioning systems based on GPS have become ubiquitous over the past few decades. Due to the attenuation of GPS signals by concrete walls, they cannot be used in an indoor setting for localization. In recent years, multiple attempts have been made to design a localization system for indoor applications. Indoor localization has the potential for trans-formative impact in a wide variety of applications like augmented reality, indoor navigation and advertising. Due to the inherent nature of the applications, high accuracy as well as energy efficiency is required.
 
 Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID\cite{bouet2008rfid}, BLE\cite{alps}, WiFi\cite{yang2012locating}, Ultrasound\cite{ultrasonic}) and motion based algorithms(Inertial based sensing)\cite{li2012reliable}. The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
+\section{Introduction}
+Related work/results
+possible choice of technology
+algorithms
+flow of this report
 
-\section{Methodology}
+\section{Design Decisions}
+\subsection{Localization Algorithm}
+\subsection{System Architecture}
+\subsection{Software Design}
+\subsection{Hardware Design}
+Hardware design
+    DWM1000 choice
+    3200 vs arduino
+Software design
+    Python
+        Networking lib
+        Localization lib
+        Matplotlib
+    DWM1000
+        Library
+
 In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of Arduino Uno Wifi and DW1000 are shown in figures \ref{arduinoBD} and \ref{DW1000BD}.
 
 \begin{figure}[!h]
@@ -571,8 +591,8 @@ Different cofigurations of placement of anchor nodes was tried out. When all fou
 
 To eliminate noise iin the samples, median filtering was performed on a sliding window. Median is particularly resilient to sparse errors. Hence the last 5 calculated co-ordinates were held in a queue. The present co-ordinate was chosen to be the median of these 5 values. This made our co-ordinates very robust.
 
-\section{Goals}
-The Goals of the project are listed below: 
+\section{Challenges}
+We faced a number of challenges during the course of this project.  These are listed below: 
 
 \begin{itemize}
     \item Goal : In our final project presentation, we plan to demonstrate the localization task performed by our system on a GUI. As the mobile node moves, the location of the node on the GUI will get updated in real-time.
