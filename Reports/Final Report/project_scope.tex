@@ -94,6 +94,7 @@
 % *** CITATION PACKAGES ***
 %
 \usepackage{cite}
+\usepackage{array}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of the IEEE. Loading the cite package will
@@ -407,9 +408,7 @@ Carnegie Mellon University, Pittsburgh, PA 15213 USA}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 %\IEEEtitleabstractindextext{%
-%\begin{abstract}
-%The abstract goes here.
-%\end{abstract}
+
 
 % Note that keywords are not normally used for peerreview papers.
 %\begin{IEEEkeywords}
@@ -449,65 +448,116 @@ Carnegie Mellon University, Pittsburgh, PA 15213 USA}}
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+\begin{abstract}
+Positioning systems based on GPS have become ubiquitous over the past few decades. Due to the attenuation of GPS signals, they cannot be used in an indoor setting for localization. In recent years, multiple attempts have been made to design a localization system for indoor applications. Indoor localization has the potential for trans-formative impact in a wide variety of applications like augmented reality, indoor navigation, asset tracking and advertising. Due to the inherent nature of the applications, high accuracy as well as energy efficiency is required.
+Based on the target application, various methods and system architectures have been proposed using broadcast-based technologies(RFID\cite{bouet2008rfid}, BLE\cite{alps}, WiFi\cite{yang2012locating}, Ultrasound\cite{ultrasonic}) and motion based algorithms(Inertial based sensing)\cite{li2012reliable}.   
 
+In our work, we develop a system for Indoor Localization to track mobile TAG nodes in an indoor setting with multiple anchor nodes whose coordinates are known. We use Decawave's DWM1000 modules to perform accurate ranging and Arduino UNO WiFi modules to control the modules and perform basic computation. We achieve a best case and average accuracy of 10cm and 20 cm across each axes.
+\footnote{Git Repository: \href{https://github.com/tejus26/Indoor-Localization.git}}
+\end{abstract}
 
-\section{Motivation}
-Positioning systems based on GPS have become ubiquitous over the past few decades. Due to the attenuation of GPS signals by concrete walls, they cannot be used in an indoor setting for localization. In recent years, multiple attempts have been made to design a localization system for indoor applications. Indoor localization has the potential for trans-formative impact in a wide variety of applications like augmented reality, indoor navigation and advertising. Due to the inherent nature of the applications, high accuracy as well as energy efficiency is required.
-
-Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID\cite{bouet2008rfid}, BLE\cite{alps}, WiFi\cite{yang2012locating}, Ultrasound\cite{ultrasonic}) and motion based algorithms(Inertial based sensing)\cite{li2012reliable}. The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
 \section{Introduction}
-Related work/results
+
+\cite{bouet2008rfid} surveys various RFID based localization strategies. RFID based localization schemes suffer from need for several active RFID anchors to be able to localize accurately. WiFi based localization require intensive calibration in the area of localization. Several methods have been proposed to crowdsource the RSSI values from different WiFi access points \cite{yang2012locating}. Another approach to this problem has been to use two different mediums and measure the time difference of arrival of signals in both the mediums. This is the approach used by \cite{alps} wherein the different speed of travel of bluetooth and ultrsonic waves are used to estimate distance. Inertial based localization strategies \cite{li2012reliable} fail to achieve sub metre accuracy due to drift from initial calibration that compounds with time. A recent development in the indoor localization domain has been the success of UWB based methods\cite{uwb}. The promise of UWB based localization was witnessed by DWM1000, a UWB localization chip winning the Microsoft indoor localization competition in the year 2015.
+
+
 possible choice of technology
 algorithms
 flow of this report
 
-\section{Design Decisions}
+\section{Architecture}
+This section describes the overall system architecture as well as some of the design decisions we took during the course of this project.  We begin by describing the different localization algorithms.  Next, we describe the software architecture and finally describe the hardware design choices.   
 \subsection{Localization Algorithm}
-\subsection{System Architecture}
-\subsection{Software Design}
-\subsection{Hardware Design}
-Hardware design
-    DWM1000 choice
-    3200 vs arduino
-Software design
-    Python
-        Networking lib
-        Localization lib
-        Matplotlib
-    DWM1000
-        Library
+There are two predominant methods used in the field of localization (both indoor and outdoor).  The first is time-of-flight measurement. This computes the point-to-point distance between two nodes based on the round trip time of a time-stamped packet travelling in a known medium. Alternatively, time-difference-of-arrival uses the difference in time of arrival between multiple packets sent from different time-synchronized anchor nodes at the same time.
 
+\subsubsection{Time of Flight}
+As shown in Figure \ref{fig:tof}, the time-of-flight (TOF) method computes the distance between the two nodes by measuring the round-trip time of a time stamped packet.  As given by equations \ref{eq:tof} and \ref{eq:distcalc} node 1 sends the packet (t1 at t1\textsubscript{tx})  and waits for node 2 to respond (t2 at t2\textsubscript{rx}).  Upon receiving the packet, node 2 responds with another packet, which contains the time difference between when node 2 receives the first packet and sends the response.  When node 1 receives node 2's response, it calculates the difference between when it sent the first packet and when it receives the response.  Node 2's response latency, which is embedded in the response packet is then subtracted from this time to obtain the true round trip time.  The packet travels twice the distance between the nodes, so the distance between the two nodes is equal to half the round trip time multiplied by the speed of the packet in the given medium, as given by \ref{eq:distcalc}.  In case of the DWM1000, the speed of the packet is the speed of light in air and in case of ultrasonic methods, this is the speed of sound in air and so on.  In 3D space, the distance computed between an anchor and a tag defines a sphere where the tag must lie.  The tag must then periodically find its distance from four different anchor nodes placed around the room.  The 3D location of the tag will then be the intersection of the four spherical surfaces generated in this process.  The advantage of the TOF method is that it does not require time synchronization between the nodes, but only requires a precise clock at the source node.  However, since the round trip time is measured, this method requires the delay added due to transducers (RF circuits in our case) and the response time of node 2 to be modelled accurately.  In the case of the DWM1000 modules, these parameters are factory calibrated and don't cause any accuracy issues.  
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=3.5in]{tof.png}
+\caption{{Illustration of Time of Flight algorithm}}
+\label{fig:tof}
+\end{figure}
+\begin{equation}
+\label{eq:tof}
+    T = (t2_{rx} - t1_{tx}) - (t2_{tx} - t1_{rx})
+\end{equation}
+
+\begin{equation}
+\label{eq:distcalc}
+    Distance = \frac{Speed\ of\ Light \times T}{2}
+\end{equation}
+
+\subsubsection{Time Difference of Arrival}
+The time-difference-of-arrival (TDOA) method is shown in <Figure>.  In this method, the target tag periodically sends beacons to anchors in its vicinity.  When the anchors have time synchronized clocks, the time difference of arrival of the packet at between each pair of anchor nodes defines a hyperbolic surface on which the target tag must lie.  The tag's 3D location can be computed by finding the intersection of all these hyperbolic surfaces.  This method does not require the response time of the anchors to be modelled and is less sensitive to transducer delay (since it computes the difference anyway).  However, it does require very precise time synchronization between the clocks of every anchor in the network.  Specifically for the DWM1000, the medium is an electromagnetic wave, so any error in time synchronization gets multiplied by the speed of light. 
+
+\subsection{System Architecture}
 In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of Arduino Uno Wifi and DW1000 are shown in figures \ref{arduinoBD} and \ref{DW1000BD}.
 
+We can localize any node if we know the distance of the node from 3 or more fixed anchor points. In the TOF approach, every node that we are trying to localize, transmits packets to a set of anchored nodes whose locations are known. The anchor nodes reply with the appropriate timestamps. Using the roundtrip time taken, the distance between pairs of nodes can be calculated. Once the distance of the mobile node from each of the anchor nodes is determined, the co-ordinates of the mobile nodes can be multilaterated in 3 dimensions.
 \begin{figure}[!h]
 \centering
 \includegraphics[width=2.5in]{arduinounobd}
 \caption{{Board layout of Arduino Uno Wifi SoC}}
 \label{arduinoBD}
 \end{figure}
+To obtain the distance measurements, we chose to use time of flight of radio over UWB spectrum. UWB involves sending very short spikes of radio signals. This provides significant benefits like fine time resolution, energy efficiency and robustness to interference in harsh environments \cite{uwb}. UWB is also particularly resistant to Multi-Path effects. In this project we used the DecaWave ScenSor DWM1000 Modules for UWB TOF measurements. We had both our mobile and anchor nodes as DWM1000 modules. Using these modules the distance of the mobile node from each of the anchor nodes was determined.  This information was accumulated at a gateway for the multilateration computation. For this we interface DWM1000 with Arduino Uno Wifi using the SPI interface supported by DWM1000.
 
-
-\begin{figure}[!t]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=3.5in]{dw1000bd}
 \caption{{Block Diagram of DW1000 UWB transceiver}}
 \label{DW1000BD}
 \end{figure}
 
-We can localize any node if we know the distance of the node from 3 or more fixed anchor points. In the TOF approach, every node that we are trying to localize, transmits packets to a set of anchored nodes whose locations are known. The anchor nodes reply with the appropriate timestamps. Using the roundtrip time taken, the distance between pairs of nodes can be calculated. Once the distance of the mobile node from each of the anchor nodes is determined, the co-ordinates of the mobile nodes can be multilaterated in 3 dimensions.
+\subsection{Software Design}
 
-To obtain the distance measurements, we chose to use time of flight of radio over UWB spectrum. UWB involves sending very short spikes of radio signals. This provides significant benefits like fine time resolution, energy efficiency and robustness to interference in harsh environments \cite{uwb}. UWB is also particularly resistant to Multi-Path effects. In this project we used the DecaWave ScenSor DWM1000 Modules for UWB TOF measurements. We had both our mobile and anchor nodes as DWM1000 modules. Using these modules the distance of the mobile node from each of the anchor nodes was determined.  This information was accumulated at a gateway for the multilateration computation. For this we interface DWM1000 with Arduino Uno Wifi using the SPI interface supported by DWM1000.
+\subsubsection{Backend Software}
+Python was chosen as the language for backend computation for the following reasons:
+\begin{itemize}
+    \item Scipy and Numpy packages provides ready access to Minimization functions required for localization algorithm
+    \item Matplotlib package provides an environment to scatter plot the tag location in 3D
+    \item Python is a language best suited for prototyping. The tradeoff in speed was tolerable in this application as the point did not have to be plotted in realtime.
+    \item Availability of Telnet library to connect to the Tag listening socket and read the distance values.
+\end{itemize}
+\subsubsection{Decawave Library}
+The Arduino DWM1000 library hosted by Thomas Trojer on github was used\cite{thotro:2017}. This library had the 2 way ranging code implemented with instructions on how to interface the DWM1000 with the Arduino. The library was still active as of writing this report.
+
+\subsubsection{WiFi Library}
+The standard library which ships with Aruduino Uno Wifi was used. It came with a reference program to relay the serial readings over Wifi. This library also makes the Arduino Uno a WiFi access point. The advantage of this compared to connecting to a public access point was the static IP allocation of the Tag node. Since the Tag was hosting the access point it always had the first IP in the subnet eliminating the need for having access to the public DHCP server.
+
+\subsection{Hardware Design}
+\subsubsection{Micro-controller Platform Decision}
+When we initially started the project we had a set of specifications in mind for the microcontroller and wireless communication device.  We required a low power microcontroller board with low power WiFi connectivity.  The MCU should have at least one SPI and one UART port for interfacing with the Decawave and debugging in addition to whatever interface it requires for WiFi.  One solution was to use a low power MCU platform like Arduino or TI's MSP430/432 Launchpad and an external WiFi board like the Arduino WiFi sheild or the CC3100 BoosterPack.  However, we already had a Decawave board and a set of level shifter ICs and we did not want to add an additional board (and therefore another point of failure).  We then refined our requirement and looked for single board solutions that incorporated a WiFi radio along with a low power MCU.  While the Raspberry Pi is an obvious solution to this, we decided against it since the Raspberry Pi comes with a 1GHz ARM processor and high speed WiFi radio, both of which were an overkill for this application and had a power consumption that was definitely out of budget.  Finally, we narrowed down to the CC3200 Launchpad and the Arduino UNO WiFi.  We initially selected the CC3200 since it incorporates a single chip WiFi+MCU and we thought its power consumption would be lower, and the powerful 80MHz ARM Cortex M4 on the CC3200 might be needed for our algorithms.  However, upon carefully analyzing our options, we concluded in favor of the Arduino for the following reasons:\\
+
+\textit{Library Support:}
+The Decawave SPI driver and 1D ranging libraries were readily available for Arduino platforms and not directly available for the CC3200.  While the CC3200 does support the "Arduino-like" Energia platform, significant porting effort may have been needed just to get the CC3200 to talk to the Decawave.  The Arduino was preferable since the Arduino SPI libraries take care of the hardware abstractions and board-to-board dependencies.\\
+
+\textit{On-chip Flash:}
+The CC3200 also suffers from another drawback, which is the fact that it does not come with any on-chip flash.  While this is taken care of in the launchpad with the help of an external flash on the board, an MCU with on-chip flash benefits from easier programming and deployment.  We saw this as a major concern for the later stages of the the project where we would need to test and calibrate multiple of these boards and program them to make tweeks during testing time.  It is more convenient to have a device with built-in flash rather than requiring the additional step of using TI's UNIFLASH to program the external flash on the CC3200 board.\\
+
+\textit{Power consumption:}
+The CC3200 has an active power consumption of about 15.3mA at 3.3V without the WiFi radio on, which translates to an active power consumption of 50.49mW. When the WiFi radio is active at peak power, the total current consumption is 278mA at 3.3V, which is 917.4mW of peak active power excluding the power consumption of the external flash, which draws an additional standby current during runtime.
+The ATMega328P consumes about 5.2mA at 5V when active, which translates to about 26mW active power consumption.  We needed to use 2 Arduinos in order to not stress the RAM on a single Arduino and obtain stable operation.  Therefore, the combined power consumption of both Arduinos is 52mW.  The Arduino responsible for WiFi transmission was an Arduino UNO WiFi with an ESP8266 WiFi Radio. The ESP8266 WiFi SoC on the Arduino UNO WiFi board has a peak power consumption of 170mA at 3.3V, and therefore has a peak power consumption of 561mW.  Therefore, our combined active power consumption for the 2 Atmel microcontrollers along with the ESP8266 is 613mW.  This makes the combined Arduino solution about 33\% more power efficient than the CC3200 solution, even without considering the CC3200's external flash's standby current. \\
+
+The main reason for choosing the CC3200 initially was that we were able to get a powerful MCU and a WiFi chip in a low cost, low power board.  However, we realized that it was more suitable to run the math-heavy least-squares linear equation solver needed for accurate localization on the backend software on a PC.  This gives us more flexibility to use the vast collection of mathematical libraries and filters available in NumPy while also reducing our MCU's CPU utilization.  Since we no longer needed such a powerful MCU, the Arduino's processing power and memory was sufficient for our purposes.  Based on the above reasons, we concluded that the Arduino UNO WiFi was the right device for the job.\\
+
+\subsubsection{DWM1000 Module}
+
+
+
+
 
 %Describe why CC3200.
-\begin{figure}[!t]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=3.5in]{nodebd.png}
 \caption{{System Block Diagram of Each Node}}
 \label{EACHNODEBD}
 \end{figure}
 
-\subsection{Arduino Uno Wifi}
-\subsection{Decawave DWM1000}
 
 \begin{figure}[!h]
 \centering
@@ -562,14 +612,16 @@ We use this data to calibrate the ranges sent from mobile node to the admin lapt
 \label{3dlocalization}
 \end{figure}
 
-The equations for localization were solved in Python using the Localization library\cite{kamalshadi:2017}. This library uses SciPy and NumPy libraries to find a least square error estimate of the three co-ordinates. The total error was defined as:
-
-$D_i = \sqrt{(X-x_i)^2 + (Y-y_i)^2 + (Z-z_i)^2}$
-
+The equations for localization were solved in Python using the Localization library\cite{kamalshadi:2017}. This library uses SciPy and NumPy libraries to find a least square error estimate of the three co-ordinates. The total error was defined as shown in Equations \ref{eq:error} and \ref{eq:dist}
+\begin{equation}
+\label{eq:dist}
+D_i = \sqrt{(X-x_i)^2 + (Y-y_i)^2 + (Z-z_i)^2}
+\end{equation}
 where, $D_i$ is the distance of the tag from anchor $i$.\\
-
-$ error = \sum\limits_{i} (D_i - r_i)^2 \forall\ anchor\ i$
-
+\begin{equation}
+\label{eq:error}
+ error = \sum\limits_{i} (D_i - r_i)^2 \forall\ anchor\ i
+\end{equation}
 where, $r_i$ is the range measured by DWM1000 to anchor $i$.\\
 
 This error was minimized using $scipy.optimize.minimize$ with the initial estimate $X=0,Y=0,Z=0$.
@@ -587,6 +639,14 @@ Different cofigurations of placement of anchor nodes was tried out. When all fou
 \label{anchorplacement}
 \end{figure}
 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=3.5in]{tagnode.JPG}
+\caption{{TAG node: DWM1000, Arduino + Arduino WiFi}}
+\label{fig:tagnode}
+\end{figure}
+
 \subsection{Median Filtering}
 
 To eliminate noise iin the samples, median filtering was performed on a sliding window. Median is particularly resilient to sparse errors. Hence the last 5 calculated co-ordinates were held in a queue. The present co-ordinate was chosen to be the median of these 5 values. This made our co-ordinates very robust.
@@ -595,25 +655,66 @@ To eliminate noise iin the samples, median filtering was performed on a sliding 
 We faced a number of challenges during the course of this project.  These are listed below: 
 
 \begin{itemize}
-    \item Goal : In our final project presentation, we plan to demonstrate the localization task performed by our system on a GUI. As the mobile node moves, the location of the node on the GUI will get updated in real-time.
-    \item Stretch Goal 1 : Due to the inherent nature of the ToF algorithm, it will not be scalable when the number of mobile nodes are significantly high. With ToF, the anchor nodes have to send packets to all nodes with accurate time-stamps when the mobile nodes request for it. An efficient algorithm called Time Difference of Arrival(TDOA) can be used to overcome this problem. 
-    \item Stretch Goal 2 : The crystals used on the DWM1000 for generating the clock frequency will have different performance on each board, which may result in inaccurate time-stamps. Due to this variance, the distance calculated may be quite inaccurate. If the error is too high, the localization will be way off. If this problem arises, we plan to synchronize the clocks across all DWM1000 modules externally to improve the accuracy.    
+\item DWM1000 did not come with a base board to mount on a breadboard. This base board was ordered separately.
+\item DWM1000 works on 3.3V while the Arduino Uno works on 5V. We had to procure level shifters to downshift the required SPI lines.
+\item The library for 2-way ranging was not stable with more than 2 anchors. These were identified as arising due to race conditions in the library code. After considerable probing, we were able to narrow down the bug to the variable whose access was shared.
+\item The distance measurements given by DWM1000 was initially off by about 1m. After plotting the actual distance vs the distance measured by DWM1000, it was evident that there is an offset between the two values. These offsets were recorded for each piecewise interval. A function was written which would convert the uncalliberated distance measured by DWM1000 to the actual distance by subtracting the corresponding offset.
+\item The Arduino Uno board did not have enough RAM to run both the ranging code as well as the WiFi library. The workaround for this problem was to attach another Arduino to act as a WiFi slip radio to the tag. This Arduino would receive the ranging distance value over UART and transmit the data over WiFi.
+\item The addition of another slave Arduino for WiFi relaying brought in additional constraints in keeping the Tag physically small and concise. We had to design custom legs for the breadboard to house both the Arduinos without bloating the Tag dimensions.
 \end{itemize}
-\section{Milestones}
-The following are the milestones expected in course of the project:
-\begin{itemize}
-    \item Interface of DWM1000 with CC3200, \today : The DWM1000 modules have to be interfaced over the SPI interface with the CC3200 MCUs. This might require significant work in porting the SPI libraries from the reference STM32F105 board to TI CC3200 board.
-    \item Distance measurement between two nodes (Mid-term Milestone) : The DWM1000 modules have to configured to work in the TOF mode. We plan to complete the distance measurement between two nodes with direct communication. In our demonstration during the mid-term project presentation, we plan to demonstrate the accuracy of distance measurement with the DWM1000 modules.
-    \item Application Development for Localization (Final Project presentation) : Once the point-to-point communication is established and distance measurement between two nodes is done, we plan to build on this to implement our final application code. The final application code running on the mobile node will calculate the distance between itself and multiple anchor nodes. This data is sent to a PC to perform localization and compute the location of the mobile node. 
 
-\end{itemize}
+\section{Milestones}
+The following are the milestones achieved in course of the project:
+
+
+\begin{center}
+\begin{tabular}{ |m{1.5cm}|m{7cm}|}
+\hline
+\textbf{Week} & \textbf{Progress} \\ 
+\hline
+Mar 27-31 & Basic Arduino Code test, Solder 2x DW1000
+modules, breadboard prototyping, Py interface\\
+\hline
+Apr 3-7 &Mid term demo. Level shifters interface, DW1000
+baseboards arrive, Perf board bring up\\
+\hline
+Apr 10-14 & Develop TOF code with 5 DW1000 modules
+working at once\\
+\hline
+Apr 17-21 & Change library for robust multi-anchor network
+connectivity and addressing\\
+\hline
+Apr 24-28 & Test TOF Code with 4 anchor+1 tag. Accuracy
+measurements,
+integrating solver code with python interface code
+and GUI extension\\
+\hline
+May 1-5 & Prep for final demos, code and H/W cleanup,
+calibrations, WiFi Integration Pending\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
 \section{Work Partitioning}
-We plan to divide the work among the three team members as follows:
-\begin{itemize}
-    \item One team member will work on interfacing the CC3200 with the PC and get the GUI running. 
-    \item Second team member will work on porting the code required for DWM1000 from reference solution to CC3200
-    \item Third team member will work on hardware interfacing of DWM1000 with CC3200.
-\end{itemize}
+The work was divided between the team members as follows:
+
+\begin{center}
+\begin{tabular}{ |m{6cm}|m{1cm}|}
+\hline
+Work Items &	Team Member\\
+\hline
+Python UI, data processing/Algo, socket programming for WiFi connection, DWM1000 offset calibration, Arduino-DWM1000 library bug fixes&	Tejus\\
+\hline
+Embedded programming - DWM1000 Interface, TOF Algo, DWM1000 offset calibration, Anchor placement tuning &	Albert\\
+\hline
+Embedded Programming - WiFi Chip Interface, Data Tfr to PC Over WiFi, Arduino-DWM1000 library bug fixes & Anirban\\
+\hline
+Board bring up, HW interface, other setup & All\\
+\hline
+\end{tabular}
+\end{center}
 
 
 
