@@ -54,6 +54,7 @@
 %\usepackage[style=authoryear,backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
 %\addbibresource{refer.bib}
 \usepackage{graphicx}
+\usepackage{url}
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
@@ -456,13 +457,13 @@ Positioning systems based on GPS have become ubiquitous over the past few decade
 Based on the application in target, various methods and system architectures have been proposed using broadcast-based technologies(RFID\cite{bouet2008rfid}, BLE\cite{alps}, WiFi\cite{yang2012locating}, Ultrasound\cite{ultrasonic}) and motion based algorithms(Inertial based sensing)\cite{li2012reliable}. The choice of the algorithm and system architecture is an integral part of solving this problem as these choices directly impact both accuracy and energy consumption of the system. 
 
 \section{Methodology}
-In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of CC3200 and DW1000 are shown in figures \ref{CC3200BD} and \ref{DW1000BD}.
+In our project, we propose and implement a system which is both accurate enough and energy efficient to be powered by batteries. The proposed method uses Time of Flight(TOF) algorithm to calculate the distance between two nodes. Although, TOF requires high time-synchronization and accurate time-stamping, we expect to achieve good results with this approach using the Decawave DW1000 sensors. The manufacturer claims a distance measurement accuracy within 10cm using these sensors.  The block diagram of Arduino Uno Wifi and DW1000 are shown in figures \ref{arduinoBD} and \ref{DW1000BD}.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=2.5in]{arduinounobd}
-\caption{{Block Diagram of CC3200 SoC}}
-\label{CC3200BD}
+\caption{{Board layout of Arduino Uno Wifi SoC}}
+\label{arduinoBD}
 \end{figure}
 
 
@@ -473,9 +474,9 @@ In our project, we propose and implement a system which is both accurate enough 
 \label{DW1000BD}
 \end{figure}
 
-We can localize any node if we know the distance of the node from 3 or more fixed anchor points. In the TOF approach, every node that we are trying to localize, transmits packets to a set of anchored nodes whose locations are known. The anchor nodes reply with the appropriate timestamps. Using the time taken for roundtrip the distance between pairs of nodes can be calculated. Once the distance of the mobile node from each of the anchor nodes is determined, the co-ordinates of the mobile nodes can be triangulated in 3 dimensions.
+We can localize any node if we know the distance of the node from 3 or more fixed anchor points. In the TOF approach, every node that we are trying to localize, transmits packets to a set of anchored nodes whose locations are known. The anchor nodes reply with the appropriate timestamps. Using the roundtrip time taken, the distance between pairs of nodes can be calculated. Once the distance of the mobile node from each of the anchor nodes is determined, the co-ordinates of the mobile nodes can be multilaterated in 3 dimensions.
 
-To obtain the distance measurements, we having chosen to use time of flight of radio over UWB spectrum. UWB involves sending very short spikes of radio signals. This provides significant benefits like fine time resolution, energy efficiency and robustness to interference in harsh environments \cite{IEEE4}. UWB is also particularly resistant to Multi-Path effects. In this project we plan to use DecaWave ScenSor DWM1000 Modules for UWB TOF measurements. We plan to have both our mobile and anchor nodes as DWM1000 modules. Using these modules the distance of the mobile node from each of the anchor nodes can be determined.  This information has to be accumulated at a gateway for the co-ordinate computation. For this we plan to interface DWM1000 with an appropriate MCU platform using the SPI interface supported by DWM1000.
+To obtain the distance measurements, we chose to use time of flight of radio over UWB spectrum. UWB involves sending very short spikes of radio signals. This provides significant benefits like fine time resolution, energy efficiency and robustness to interference in harsh environments \cite{uwb}. UWB is also particularly resistant to Multi-Path effects. In this project we used the DecaWave ScenSor DWM1000 Modules for UWB TOF measurements. We had both our mobile and anchor nodes as DWM1000 modules. Using these modules the distance of the mobile node from each of the anchor nodes was determined.  This information was accumulated at a gateway for the multilateration computation. For this we interface DWM1000 with Arduino Uno Wifi using the SPI interface supported by DWM1000.
 
 %Describe why CC3200.
 \begin{figure}[!t]
@@ -485,9 +486,8 @@ To obtain the distance measurements, we having chosen to use time of flight of r
 \label{EACHNODEBD}
 \end{figure}
 
-A single chip Wireless MCU - CC3200 from Texas Instruments will be used to configure the sensor and run our application. The CC3200 SoC comes with a inbuilt WiFi module which can be used to interface with a PC to log the data and monitor all the nodes.
-
-CC3200 is a WiFi Certified single chip Micro controller unit with built-in 2.4GHz PHY/MAC and TCP/IP networking engine. The controller provides a easy to use framework with wide variety of peripherals. Multiple Real-Time Operating systems like FreeRTOS and TIRTOS are supported for this platform. Although, we do not plan to use many of these features, the platform/software can be scaled to implement complex algorithms and capabilities in the future. The network engine on this controller can be configured to behave as an access point or as a host. A mobile device or a personal computer can connect to the SoC when configured as an access point. We plan to use this capability to log data and monitor all the mobile nodes. In our architecture, the mobile node transfers all the data(time stamps from each anchor node) to a personal computer(gateway). This gateway then uses these pairwise distance measurements to compute the co-ordinates of the mobile node. A software application running on the computer, logs this data and displays the location of the mobile nodes on a GUI. 
+\subsection{Arduino Uno Wifi}
+\subsection{Decawave DWM1000}
 
 \begin{figure}[!h]
 \centering
@@ -496,12 +496,12 @@ CC3200 is a WiFi Certified single chip Micro controller unit with built-in 2.4GH
 \label{SYSTEMBD}
 \end{figure}
 
-One disadvantage of using ToF algorithm is that it cannot be scaled. As the number of nodes increase, we expect each node to consume more energy. As an extended goal, we propose to use Time Difference of Arrival(TDOA)\cite{anthonyrowe's paper} to provide scalability. In this system architecture, anchor nodes will broadcast their location to all the nodes that are being localized in the vicinity. Using the anchor node's location and the difference in time of arrival of packets from each of the anchor nodes, triangulation can be performed. A detailed explanation of these algorithms are provided in the next section.
+%One disadvantage of using ToF algorithm is that it cannot be scaled. As the number of nodes increase, we expect each node to consume more energy. As an extended goal, we propose to use Time Difference of Arrival(TDOA)\cite{anthonyrowe's paper} to provide scalability. In this system architecture, anchor nodes will broadcast their location to all the nodes that are being localized in the vicinity. Using the anchor node's location and the difference in time of arrival of packets from each of the anchor nodes, triangulation can be performed. A detailed explanation of these algorithms are provided in the next section.
 
 \section{Implementation}
-As show in figure \ref{SYSTEMBD}, we use multiple anchor nodes with known positions to locate a mobile tag node. We use dynamic network discovery to connect tags with anchor nodes and perform 2-way ranging with each anchor node. The calculated distance between the tag and each anchor is sent from the tag to an admin laptop over WiFi. The distances from four anchor nodes is used to perform localization. The error of localization in our implementation is as less as 10 cm on each axis in the best case. On an average, we are able to locate the mobile node within a 20 cm error on all three axes. 
+As shown in figure \ref{SYSTEMBD}, we use multiple anchor nodes with known positions to locate a mobile tag node. We use dynamic network discovery to connect tags with anchor nodes and perform 2-way ranging with each anchor node. The calculated distance between the tag and each anchor is sent from the tag to an admin laptop over WiFi. The distances from four anchor nodes is used to perform localization. The error of localization in our implementation is as less as 10 cm on each axis in the best case. On an average, we are able to locate the mobile node within a 20 cm error on all three axes. 
 \subsection{Network Discovery and Communication}
-A mobile tag node performs network discovery and initiates 2-way ranging with each of the anchor nodes. \textit{TAG} node controls the entire network to calculate the point-to-point distance betwee the anchor node and itself. As soon as the \textit{TAG} node is turned on, it broadcasts a \textbf{POLL} packet to all its neighbours. All the \textit{ANCHOR} nodes that receive the broadcast packet, respond with a \textbf{POLL\_ACK} message. The mobile node uses these acknowledgement messages to prepare a list of anchor nodes in its range. It is important to note that the mobile node sends one broadcast message and received multiple acknowledgment messages.\\  
+A mobile tag node performs network discovery and initiates 2-way ranging with each of the anchor nodes. \textit{TAG} node controls the entire network to calculate the point-to-point distances between the anchor nodes and itself. As soon as the \textit{TAG} node is turned on, it broadcasts a \textbf{POLL} packet to all its neighbours. All the \textit{ANCHOR} nodes that receive the broadcast packet, respond with a \textbf{POLL\_ACK} message. The mobile node uses these acknowledgement messages to prepare a list of anchor nodes in its range. It is important to note that the mobile node sends one broadcast message and receives multiple acknowledgment messages.\\  
 \begin{figure}[!h]
 \centering
 \includegraphics[width=3.5in]{communication.png}
@@ -513,14 +513,22 @@ Using the network discovery performed using \textbf{POLL} and \textbf{POLL\_ACK}
 If an anchor node goes out of range after responding with the acknowledgement message, the mobile node marks it as an inactive node and deletes the corresponding anchor node from its network list. Thus, our communication protocol can discover dead anchor nodes immediately.
 
 \subsection{Ranging Calibration}
-Although the timestamps used by DWM1000 modules to perform 2-way ranging are quite accurate, there is an error in the point-to-point distance calculated due to the communication protocol overhead. Comparison between the actual distance and the calculated distance was made. It is observed that for small ranges, the error in the distance measurement is quite high and this error reduces as the distance between two nodes increase. The error is calculated for distances from 0 meters to 10 meters and the plot is shown in figure \ref{errorcalib}. 
+Although the timestamps used by DWM1000 modules to perform 2-way ranging are quite accurate, there is an error in the point-to-point distance calculated due to the communication protocol overhead. Comparison between the actual distance and the calculated distance was made. It is observed that for small ranges, the percentage error in the distance measurement is quite high and this error reduces as the distance between two nodes increase. The error is calculated for distances from few centimeters to 10 meters and the plot is shown in figure \ref{abs_error} \& \ref{errorcalib}. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=3.5in]{wsn_abs_error.png}
+\caption{{Absolute error between 2 nodes while doing 2-way ranging}}
+\label{abs_error}
+\end{figure}
+
 \begin{figure}[!h]
 \centering
 \includegraphics[width=3.5in]{errorcalibfig.png}
-\caption{{Error Calibration for 2-way ranging}}
+\caption{{Percentage error between 2 nodes while doing 2-way ranging}}
 \label{errorcalib}
 \end{figure}
-We use this data to calibrate the ranges sent from mobile node to the admin laptop. The point-to-point distance between the tag node and each anchor node is calibrated using a look-up table. Error calibration using this technique increased the localization accuracy significantly. The error calibration increased the accuracy from 50 cm on all three axes to 20 cm on an average.
+
+We use this data to calibrate the ranges sent from mobile node to the admin laptop. The point-to-point distance between the tag node and each anchor node is calibrated using a piecewise linear look-up table. Error calibration using this technique increased the localization accuracy significantly. The error calibration increased the accuracy from 50 cm on all three axes to 20 cm on an average. This only made our equation solver stable and converge sooner.
 
 
 
@@ -534,15 +542,34 @@ We use this data to calibrate the ranges sent from mobile node to the admin lapt
 \label{3dlocalization}
 \end{figure}
 
+The equations for localization were solved in Python using the Localization library\cite{kamalshadi:2017}. This library uses SciPy and NumPy libraries to find a least square error estimate of the three co-ordinates. The total error was defined as:
+
+$D_i = \sqrt{(X-x_i)^2 + (Y-y_i)^2 + (Z-z_i)^2}$
+
+where, $D_i$ is the distance of the tag from anchor $i$.\\
+
+$ error = \sum\limits_{i} (D_i - r_i)^2 \forall\ anchor\ i$
+
+where, $r_i$ is the range measured by DWM1000 to anchor $i$.\\
+
+This error was minimized using $scipy.optimize.minimize$ with the initial estimate $X=0,Y=0,Z=0$.
+
+
 
 \subsection{Placement of Anchor Nodes}
+
+Different cofigurations of placement of anchor nodes was tried out. When all four anchor nodes were placed in one plane, the error in distances from each anchor gets compounded along the perperdicular dimension. Therefore the best possible placement was achieved by placing the 4 anchors as orthogonal as possible as shown in Figure: \ref{anchorplacement}. The lengths along each dimension were chosen for convenience of placing anchor nodes.
+
 \begin{figure}[!h]
 \centering
-\includegraphics[width=3.5in]{anchorplacements.png}
-\caption{{Placement of four Anchor Nodes}}
+\includegraphics[width=3.5in]{anchorplacements3d.jpg}
+\caption{{Placement of four Anchor Nodes. All dimensions are in meters.}}
 \label{anchorplacement}
 \end{figure}
 
+\subsection{Median Filtering}
+
+To eliminate noise iin the samples, median filtering was performed on a sliding window. Median is particularly resilient to sparse errors. Hence the last 5 calculated co-ordinates were held in a queue. The present co-ordinate was chosen to be the median of these 5 values. This made our co-ordinates very robust.
 
 \section{Goals}
 The Goals of the project are listed below: 
